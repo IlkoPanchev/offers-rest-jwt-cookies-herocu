@@ -212,7 +212,7 @@ public class AuthenticationController {
         cookie.setPath("/");
         cookie.setMaxAge(86400);//24h in sec
 //        cookie.setDomain("http://localhost:8080");
-//        cookie.setDomain("https://offers-rest-jwt-cookies.herokuapp.com");
+        cookie.setDomain("offers-rest-jwt-cookies.herokuapp.com");
 
         return cookie;
     }
