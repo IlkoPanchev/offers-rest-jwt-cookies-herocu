@@ -208,7 +208,7 @@ public class AuthenticationController {
 
         Cookie cookie = new Cookie(name, value);
         cookie.setHttpOnly(true);
-//        cookie.setSecure(true);
+        cookie.setSecure(true);
         cookie.setPath("/");
         cookie.setMaxAge(86400);//24h in sec
 //        cookie.setDomain("http://localhost:8080");
