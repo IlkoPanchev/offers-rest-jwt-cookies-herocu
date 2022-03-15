@@ -160,19 +160,34 @@ public class AuthenticationController {
         return userRolesAsString;
     }
 
-    private ResponseEntity<?> getResponseEntity(HttpServletResponse httpServletResponse, String username, String password) {
+    private ResponseEntity<?> getResponseEntity(HttpServletResponse response, String username, String password) {
 
         Authentication authentication = authenticateUser(username, password);
         String jwt = jwtProvider.generateJwtToken(authentication);
 
         Cookie authCookie = createAuthCookie("authToken", jwt);
-        httpServletResponse.addCookie(authCookie);
+        response.addCookie(authCookie);
+
+        addSameSiteCookieAttribute(response);
 
         UserViewBindingModel userViewBindingModel = getUserDetails(authentication);
 
         return ResponseEntity
                 .ok()
                 .body(userViewBindingModel);
+    }
+
+    private void addSameSiteCookieAttribute(HttpServletResponse response) {
+        Collection<String> headers = response.getHeaders(HttpHeaders.SET_COOKIE);
+        boolean firstHeader = true;
+        for (String header : headers) {
+            if (firstHeader) {
+                response.setHeader(HttpHeaders.SET_COOKIE, String.format("%s; %s", header, "SameSite=Lax"));
+                firstHeader = false;
+                continue;
+            }
+            response.addHeader(HttpHeaders.SET_COOKIE, String.format("%s; %s", header, "SameSite=Lax"));
+        }
     }
 
     private Authentication authenticateUser(String username, String password) {
