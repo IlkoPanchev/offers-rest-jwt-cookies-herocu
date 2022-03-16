@@ -182,11 +182,11 @@ public class AuthenticationController {
         boolean firstHeader = true;
         for (String header : headers) {
             if (firstHeader) {
-                response.setHeader(HttpHeaders.SET_COOKIE, String.format("%s; %s", header, "SameSite=Lax"));
+                response.setHeader(HttpHeaders.SET_COOKIE, String.format("%s; %s", header, "SameSite=None"));
                 firstHeader = false;
                 continue;
             }
-            response.addHeader(HttpHeaders.SET_COOKIE, String.format("%s; %s", header, "SameSite=Lax"));
+            response.addHeader(HttpHeaders.SET_COOKIE, String.format("%s; %s", header, "SameSite=None"));
         }
     }
 
@@ -227,7 +227,7 @@ public class AuthenticationController {
         cookie.setPath("/");
         cookie.setMaxAge(86400);//24h in sec
 //        cookie.setDomain("http://localhost:8080");
-        cookie.setDomain("offers-rest-jwt-cookies.herokuapp.com");
+//        cookie.setDomain("offers-rest-jwt-cookies.herokuapp.com");
 
         return cookie;
     }
