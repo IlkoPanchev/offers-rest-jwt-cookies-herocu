@@ -99,6 +99,7 @@ public class AuthenticationController {
 
         Cookie deleteCookie = createDeleteCookie("authToken", "");
         httpServletResponse.addCookie(deleteCookie);
+        addSameSiteCookieAttribute(httpServletResponse);
 
         return ResponseEntity.ok(new MessageResponse(GlobalConstants.USER_LOGOUT));
 
@@ -235,6 +236,7 @@ public class AuthenticationController {
     private Cookie createDeleteCookie(String name, String value) {
 
         Cookie cookie = new Cookie(name, value);
+        cookie.setSecure(true);
         cookie.setHttpOnly(true);
         cookie.setPath("/");
         cookie.setMaxAge(0);
