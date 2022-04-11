@@ -26,7 +26,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins = {"http://localhost:4200", "https://offers-jwt-ngrx.herokuapp.com"}, maxAge = 3600)
 @RequestMapping("/api/offers")
 public class CarsController {
 

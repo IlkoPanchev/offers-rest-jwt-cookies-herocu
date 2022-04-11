@@ -30,7 +30,7 @@ import javax.validation.constraints.Min;
 import java.util.*;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "http://localhost:4200", maxAge = 3600)
+@CrossOrigin(origins = {"http://localhost:4200", "https://offers-jwt-ngrx.herokuapp.com"}, maxAge = 3600)
 @RestController
 @RequestMapping("/api/users")
 public class AuthenticationController {
